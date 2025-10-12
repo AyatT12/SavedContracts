@@ -72,69 +72,95 @@ jQuery(document).ready(function () {
 });
 
 function HideFirstImg() {
-  var firstImg = document.getElementById('upload-img1');
-  firstImg.style.display = 'none';
+  var firstImg = document.getElementById("upload-img1");
+  firstImg.style.display = "none";
 }
 
 var imgArray = [];
 
 function ImgUpload() {
-  var imgWrap = '';
+  var imgWrap = "";
 
-  $('.upload__inputfile').each(function () {
-    $(this).on('change', function (e) {
-      imgWrap = $(this).closest('.upload__box').find('.upload_img-wrap_inner');
-      var maxLength = 12;
+  $(".upload__inputfile").each(function () {
+    $(this).on("change", function (e) {
+      imgWrap = $(this).closest(".upload__box").find(".upload_img-wrap_inner");
+      var maxLength = 22;
       var files = e.target.files;
       var filesArr = Array.prototype.slice.call(files);
-      var uploadBtnBox = document.getElementById('checking-img');
-      var uploadBtnBox1 = document.getElementById('upload__btn-box');
-      var errorMessageDiv = document.getElementById('error-message');
+      var uploadBtnBox = document.getElementById("checking-img");
+      var uploadBtnBox1 = document.getElementById("upload__btn-box");
+      var errorMessageDivs = document.getElementsByClassName("Examination-error-message"); 
 
       if (imgArray.length + filesArr.length > maxLength) {
         uploadBtnBox.disabled = true;
-        errorMessageDiv.textContent = 'بحد أدنى صورة واحدة (۱) وحدأقصى اثني عشرة صورة (۱۲) ';
-        errorMessageDiv.style.display = 'block';
-        uploadBtnBox1.style.display = 'none';
+        // Loop 
+        for (var j = 0; j < errorMessageDivs.length; j++) {
+          errorMessageDivs[j].textContent =
+            "الرجاء ... التحقق من جميع البنود و بحد اقصى 22 صورة";
+          errorMessageDivs[j].style.display = "block";
+        }
+        uploadBtnBox1.style.display = "none";
       } else {
         uploadBtnBox.disabled = false;
-        errorMessageDiv.style.display = 'none';
-        uploadBtnBox1.style.display = 'block';
+        // Loop 
+        for (var j = 0; j < errorMessageDivs.length; j++) {
+          errorMessageDivs[j].style.display = "none";
+        }
+        uploadBtnBox1.style.display = "block";
       }
 
-      for (var i = 0; i < Math.min(filesArr.length, maxLength - imgArray.length); i++) {
-        (function (f) {
-          console.log("Selected file type:", f.type);
+      var processedCount = 0;
+      var totalToProcess = Math.min(filesArr.length, maxLength - imgArray.length);
 
-          if (f.type === 'image/heic' || f.type === 'image/heif' || f.name.endsWith('.heic') || f.name.endsWith('.heif')) {
-            console.log("Processing HEIC/HEIF file:", f.name); 
+      for (var i = 0; i < totalToProcess; i++) {
+        (function (f) {
+          // console.log("Selected file type:", f.type);
+
+          if (
+            f.type === "image/heic" ||
+            f.type === "image/heif" ||
+            f.name.endsWith(".heic") ||
+            f.name.endsWith(".heif")
+          ) {
+            console.log("Processing HEIC/HEIF file:", f.name);
 
             heic2any({
               blob: f,
-              toType: "image/jpeg"
-            }).then(function (convertedBlob) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                var html =
-                  "<div class='upload__img-box'><div style='background-image: url(" +
-                  e.target.result +
-                  ")' data-number='" +
-                  $('.upload__img-close2').length +
-                  "' data-file='" +
-                  f.name +
-                  "' class='img-bg'><div class='upload__img-close2'><img src='img/delete.png'></div></div></div>";
+              toType: "image/jpeg",
+            })
+              .then(function (convertedBlob) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  var html =
+                    "<div class='upload__img-box'><div style='background-image: url(" +
+                    e.target.result +
+                    ")' data-number='" +
+                    $(".upload__img-close1").length +
+                    "' data-file='" +
+                    f.name +
+                    "' class='img-bg'><div class='upload__img-close1'><img src='img/delete.png'></div></div></div>";
 
-                imgWrap.append(html);
-                imgArray.push({
-                  f: f,
-                  url: e.target.result
-                });
-                console.log(imgArray);
-              };
-              reader.readAsDataURL(convertedBlob); 
-            }).catch(function (err) {
-              console.error("Error converting HEIC/HEIF image:", err);
-            });
+                  imgWrap.append(html);
+                  imgArray.push({
+                    f: f,
+                    url: e.target.result,
+                  });
+                  console.log(imgArray);
+                  
+                  processedCount++;
+                  if (processedCount === totalToProcess) {
+                    setTimeout(setImageRowHeight, 100);
+                  }
+                };
+                reader.readAsDataURL(convertedBlob);
+              })
+              .catch(function (err) {
+                console.error("Error converting HEIC/HEIF image:", err);
+                processedCount++;
+                if (processedCount === totalToProcess) {
+                  setTimeout(setImageRowHeight, 100);
+                }
+              });
           } else {
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -142,27 +168,32 @@ function ImgUpload() {
                 "<div class='upload__img-box'><div style='background-image: url(" +
                 e.target.result +
                 ")' data-number='" +
-                $('.upload__img-close2').length +
+                $(".upload__img-close1").length +
                 "' data-file='" +
                 f.name +
-                "' class='img-bg'><div class='upload__img-close2'><img src='img/delete.png'></div></div></div>";
+                "' class='img-bg'><div class='upload__img-close1'><img src='img/delete.png'></div></div></div>";
               imgWrap.append(html);
               imgArray.push({
                 f: f,
-                url: e.target.result
+                url: e.target.result,
               });
-              console.log(imgArray);
+              // console.log(imgArray);
+              
+              processedCount++;
+              if (processedCount === totalToProcess) {
+                setTimeout(setImageRowHeight, 100);
+              }
             };
-            reader.readAsDataURL(f); 
+            reader.readAsDataURL(f);
           }
         })(filesArr[i]);
       }
     });
   });
 
-  $('body').on('click', '.upload__img-close2', function (e) {
+  $("body").on("click", ".upload__img-close1", function (e) {
     e.stopPropagation();
-    var file = $(this).parent().data('file');
+    var file = $(this).parent().data("file");
 
     for (var i = 0; i < imgArray.length; i++) {
       if (imgArray[i].f.name === file) {
@@ -174,38 +205,112 @@ function ImgUpload() {
     $(this).parent().parent().remove();
     console.log(imgArray);
 
-    var maxLength = 12;
-    var uploadBtnBox = document.getElementById('checking-img');
-    var errorMessageDiv = document.getElementById('error-message');
-    var uploadBtnBox1 = document.getElementById('upload__btn-box');
+    var maxLength = 22;
+    var uploadBtnBox = document.getElementById("checking-img");
+    var errorMessageDivs = document.getElementsByClassName("Examination-error-message");
+    var uploadBtnBox1 = document.getElementById("upload__btn-box");
 
     if (imgArray.length >= maxLength) {
       uploadBtnBox.disabled = true;
-      errorMessageDiv.textContent = 'بحد أدنى صورة واحدة (۱) وحدأقصى اثني عشرة صورة (۱۲) ';
-      errorMessageDiv.style.display = 'block';
-      uploadBtnBox1.style.display = 'none';
+      // Loop
+      for (var j = 0; j < errorMessageDivs.length; j++) {
+        errorMessageDivs[j].textContent =
+          "الرجاء ... التحقق من جميع البنود و بحد اقصى 22 صورة";
+        errorMessageDivs[j].style.display = "block";
+      }
+      uploadBtnBox1.style.display = "none";
     } else {
       uploadBtnBox.disabled = false;
-      errorMessageDiv.style.display = 'none';
-      uploadBtnBox1.style.display = 'block';
+      // Loop
+      for (var j = 0; j < errorMessageDivs.length; j++) {
+        errorMessageDivs[j].style.display = "none";
+      }
+      uploadBtnBox1.style.display = "block";
     }
-  });
-
-  $('body').on('click', '.img-bg', function (e) {
-    var imageUrl = $(this).css('background-image');
-    imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, '$1');
-    var newTab = window.open();
-    newTab.document.body.innerHTML = '<img src="' + imageUrl + '">';
-  
-    $(newTab.document.body).css({
-      'background-color': 'black',
-      display: 'flex',
-      'align-items': 'center',
-      'justify-content': 'center',
-    });
+    
+    setTimeout(setImageRowHeight, 50);
   });
 }
 
+function setImageRowHeight() {
+
+     if (window.innerWidth <= 1199) {
+        const imagesRow = document.querySelector('.virtual-check-images-row');
+        if (imagesRow) {
+            imagesRow.style.height = '';
+        }
+        return;
+    }
+    const virtualCheckData = document.querySelector('.virtual-check-data');
+    const imagesRow = document.querySelector('.virtual-check-images-row');
+    
+    if (!virtualCheckData || !imagesRow) return;
+    
+    let attempts = 0;
+    const maxAttempts = 5;
+    
+    function measureHeight() {
+        const parentHeight = virtualCheckData.offsetHeight;
+        const currentReadingRows = document.querySelectorAll('.CurrentReadingg_row');
+        const errorMessage = document.querySelector('.virtual-check-data > .row.mt-auto');
+        
+        let otherElementsHeight = 0;
+        
+        currentReadingRows.forEach(row => {
+            otherElementsHeight += row.offsetHeight;
+        });
+        
+         if (errorMessage) {
+            otherElementsHeight += errorMessage.offsetHeight;
+        }
+        const buffer = 20;
+        const availableHeight = parentHeight - otherElementsHeight - buffer - 50;
+        console.log(availableHeight)
+        console.log(parentHeight)
+        if (availableHeight > 50 || attempts >= maxAttempts) {
+            imagesRow.style.height = `${Math.max(availableHeight, 200)}px`;
+            return true;
+        }
+        return false;
+    }
+    
+    function tryMeasure() {
+        attempts++;
+        const success = measureHeight();
+        
+        if (!success && attempts < maxAttempts) {
+            setTimeout(tryMeasure, 100);
+        }
+    }
+    
+    tryMeasure();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(setImageRowHeight, 100);
+    setTimeout(setImageRowHeight, 500);
+    setTimeout(setImageRowHeight, 1000);
+});
+
+window.addEventListener('resize', function() {
+    setTimeout(setImageRowHeight, 50);
+    setTimeout(setImageRowHeight, 100);
+    setTimeout(setImageRowHeight, 200);
+});
+
+$("body").on("click", ".img-bg", function (e) {
+  var imageUrl = $(this).css("background-image");
+  imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
+  var newTab = window.open();
+  newTab.document.body.innerHTML = '<img src="' + imageUrl + '">';
+
+  $(newTab.document.body).css({
+    "background-color": "black",
+    display: "flex",
+    "align-items": "center",
+    "justify-content": "center",
+  });
+});
 
 
 //====================================================================================================
@@ -213,40 +318,59 @@ function ImgUpload() {
 const DataIcon = document.getElementById('Contract-data-icon');
 const dropdown = document.getElementById('dropdown-ContractData');
 
-DataIcon.addEventListener('click', function () {
-	if (dropdown.style.display === 'block') {
-        dropdown.style.display = 'none';
-    } else {
-        dropdown.style.display = 'block';
-        dropdown2.style.display = 'none';
-        dropdown3.style.display = 'none';
-        dropdown4.style.display = 'none';
+DataIcon.addEventListener("click", function(event) {
+  event.stopPropagation(); 
+  if (dropdown.style.display === "none" || dropdown.style.display === "") {
+    dropdown.style.display = "block";
+    dropdown2.style.display = 'none';
+    dropdown3.style.display = 'none';
+    dropdown4.style.display = 'none';
+  } else {
+    dropdown.style.display = "none";
+  }
+});
 
+document.addEventListener("click", function(event) {
+  if (!DataIcon.contains(event.target) && !dropdown.contains(event.target)) {
+    dropdown.style.display = "none";
+  }
+});
 
-    }
+dropdown.addEventListener("click", function(event) {
+  event.stopPropagation();
 });
 //====================================================================================================
 //====================================================================================================
 const DataIcon2 = document.getElementById('Car-data-icon');
 const dropdown2 = document.getElementById('dropdown-content-CarData');
 
-DataIcon2.addEventListener('click', function () {
-	if (dropdown2.style.display === 'block') {
-        dropdown2.style.display = 'none';
-    } else {
-        dropdown2.style.display = 'block';
-        dropdown.style.display = 'none';
-        dropdown3.style.display = 'none';
-        dropdown4.style.display = 'none';
+DataIcon2.addEventListener("click", function(event) {
+  event.stopPropagation(); 
+  if (dropdown2.style.display === "none" || dropdown2.style.display === "") {
+    dropdown2.style.display = "block";
+    dropdown.style.display = 'none';
+    dropdown3.style.display = 'none';
+    dropdown4.style.display = 'none';
+  } else {
+    dropdown2.style.display = "none";
+  }
+});
 
-    }
+document.addEventListener("click", function(event) {
+  if (!DataIcon2.contains(event.target) && !dropdown2.contains(event.target)) {
+    dropdown2.style.display = "none";
+  }
+});
+
+dropdown2.addEventListener("click", function(event) {
+  event.stopPropagation();
 });
 //====================================================================================================
 //====================================================================================================
 const DataIcon3 = document.getElementById('tenant-data-icon');
 const dropdown3 = document.getElementById('dropdown-content-tenantData');
-
-DataIcon3.addEventListener('click', function () {
+DataIcon3.addEventListener('click', function (event) {
+  event.stopPropagation(); 
 	if (dropdown3.style.display === 'block') {
         dropdown3.style.display = 'none';
 
@@ -258,12 +382,22 @@ DataIcon3.addEventListener('click', function () {
 
     }
 });
+document.addEventListener("click", function(event) {
+  if (!DataIcon3.contains(event.target) && !dropdown2.contains(event.target)) {
+    dropdown3.style.display = "none";
+  }
+});
+
+dropdown3.addEventListener("click", function(event) {
+  event.stopPropagation();
+});
 //====================================================================================================
 //====================================================================================================
 const DataIcon4 = document.getElementById('contract-value-icon');
 const dropdown4 = document.getElementById('dropdown-content-contractValue');
 
-DataIcon4.addEventListener('click', function () {
+DataIcon4.addEventListener('click', function (event) {
+  event.stopPropagation(); 
 	if (dropdown4.style.display === 'block') {
         dropdown4.style.display = 'none';
 
@@ -272,19 +406,18 @@ DataIcon4.addEventListener('click', function () {
         dropdown.style.display = 'none';
         dropdown2.style.display = 'none';
         dropdown3.style.display = 'none';
-
     }
 });
+document.addEventListener("click", function(event) {
+  if (!DataIcon4.contains(event.target) && !dropdown2.contains(event.target)) {
+    dropdown4.style.display = "none";
+  }
+});
 
-
+dropdown4.addEventListener("click", function(event) {
+  event.stopPropagation();
+});
 //====================================================================================================
-$('#Expenses-images').click(function(){
-  $('.upload__img-box').eq(0).hide();
-  var x =  $('.upload__img-box')
-})
-$('#compensation-images').click(function(){
-  $('#FirstUpload-img2').hide()
-})
 $('#examination-images').click(function(){
    $('#FirstUpload-img3').hide()
 })
