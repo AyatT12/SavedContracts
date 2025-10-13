@@ -322,8 +322,6 @@ DataIcon.addEventListener("click", function(event) {
   event.stopPropagation(); 
   if (dropdown.style.display === "none" || dropdown.style.display === "") {
     dropdown.style.display = "block";
-    dropdown2.style.display = 'none';
-    dropdown3.style.display = 'none';
     dropdown4.style.display = 'none';
   } else {
     dropdown.style.display = "none";
@@ -339,56 +337,29 @@ document.addEventListener("click", function(event) {
 dropdown.addEventListener("click", function(event) {
   event.stopPropagation();
 });
-//====================================================================================================
-//====================================================================================================
-const DataIcon2 = document.getElementById('Car-data-icon');
-const dropdown2 = document.getElementById('dropdown-content-CarData');
 
-DataIcon2.addEventListener("click", function(event) {
+//====================================================================================================
+//====================================================================================================
+const DataIcon2 = document.getElementById('payment-contract-value-icon');
+const dropdown2 = document.getElementById('payment-dropdowncontent-contractValue');
+
+DataIcon2.addEventListener('click', function (event) {
   event.stopPropagation(); 
-  if (dropdown2.style.display === "none" || dropdown2.style.display === "") {
-    dropdown2.style.display = "block";
-    dropdown.style.display = 'none';
-    dropdown3.style.display = 'none';
-    dropdown4.style.display = 'none';
-  } else {
-    dropdown2.style.display = "none";
-  }
-});
+	if (dropdown2.style.display === 'block') {
+        dropdown2.style.display = 'none';
 
+    } else {
+        dropdown2.style.display = 'block';
+        dropdown.style.display = 'none';
+    }
+});
 document.addEventListener("click", function(event) {
-  if (!DataIcon2.contains(event.target) && !dropdown2.contains(event.target)) {
+  if (!DataIcon2.contains(event.target) && !dropdown.contains(event.target)) {
     dropdown2.style.display = "none";
   }
 });
 
 dropdown2.addEventListener("click", function(event) {
-  event.stopPropagation();
-});
-//====================================================================================================
-//====================================================================================================
-const DataIcon3 = document.getElementById('tenant-data-icon');
-const dropdown3 = document.getElementById('dropdown-content-tenantData');
-DataIcon3.addEventListener('click', function (event) {
-  event.stopPropagation(); 
-	if (dropdown3.style.display === 'block') {
-        dropdown3.style.display = 'none';
-
-    } else {
-        dropdown3.style.display = 'block';
-        dropdown.style.display = 'none';
-        dropdown2.style.display = 'none';
-        dropdown4.style.display = 'none';
-
-    }
-});
-document.addEventListener("click", function(event) {
-  if (!DataIcon3.contains(event.target) && !dropdown2.contains(event.target)) {
-    dropdown3.style.display = "none";
-  }
-});
-
-dropdown3.addEventListener("click", function(event) {
   event.stopPropagation();
 });
 //====================================================================================================
@@ -404,12 +375,10 @@ DataIcon4.addEventListener('click', function (event) {
     } else {
         dropdown4.style.display = 'block';
         dropdown.style.display = 'none';
-        dropdown2.style.display = 'none';
-        dropdown3.style.display = 'none';
     }
 });
 document.addEventListener("click", function(event) {
-  if (!DataIcon4.contains(event.target) && !dropdown2.contains(event.target)) {
+  if (!DataIcon4.contains(event.target) && !dropdown.contains(event.target)) {
     dropdown4.style.display = "none";
   }
 });
