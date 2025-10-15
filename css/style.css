@@ -1927,6 +1927,9 @@ footer {
 .Checkup-table td{
     vertical-align: middle;
 }
+.Checkup-table th{
+position: static;
+}
 .check-table-notes{
     resize: none;
     min-height: 30px;
@@ -2669,13 +2672,29 @@ input[type="number"]:nth-child(n+4) {
     text-align: center;
     border: 2px solid;
 }
-
+.Plate-Number
+{
+    display: none;
+}
+.custom-tooltip {
+  --bs-tooltip-bg:rgba(0, 0, 0, 0.753);
+  --bs-tooltip-color:white;
+}
 @media (min-width:992px) {
     #dropdown-content-contractValue{
     right: 15px;
     bottom: 35px;
     }
 }
+@media (max-width:520px) {
+    .CarInfo{
+     display: none;
+    }
+    .Plate-Number{
+        display: block;
+    }
+}
+
 /* *******************************************************************************تعديل  ستايل الدروب داون  ****************************************************************************************************** */
 /* تعديل اتجاه مدخل التاريخ حسب اللغة  */
 input[type="date"] {
