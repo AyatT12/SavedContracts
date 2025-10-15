@@ -18,9 +18,7 @@
     <!-- <link href="css/loader.css" rel="styleSheet"> -->
     <!-- <link href="css/English_style.css" rel="styleSheet"> -->
 </head>
-
 <body id="page-top" style="background-color:rgba(254, 248, 232, 1);">
-
     <!-- Content Wrapper -->
     <div id="content-wrapper">
 
@@ -84,7 +82,7 @@
                                                                     <P class="mb-0">24-1401-4004101-000090 </P>
                                                                 </div>
                                                                 <!-- edited -->
-                                                                <div class="col-sm-auto  seacrh-icon-col">
+                                                                <div class="col-md-auto  seacrh-icon-col">
                                                                     <div
                                                                         class="col-sm-12  d-flex justify-content-end px-0">
 
@@ -195,8 +193,8 @@
                                                                     <P class="mb-0">السيارة </P>
                                                                 </div>
                                                                 <div class="col-auto personal-data">
-                                                                    <P class="mb-0">تويوتا - يارس - اقتصادية - 2019 - ر
-                                                                        س ر 0783 - بيج</P>
+                                                                    <P class="CarInfo mb-0">تويوتا - يارس - اقتصادية - 2019 - ر س ر 0783 - بيج</P>
+                                                                    <p class="Plate-Number mb-0">ر س ر 0783 </p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -208,7 +206,7 @@
                                                                     <P class="mb-0"> المستأجر </P>
                                                                 </div>
                                                                 <div class="col-auto personal-data">
-                                                                    <P class="mb-0"> أسامة موفق معاذ طه</P>
+                                                                    <P class="mb-0 Tenant-Name" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="عائشة عبدالغفور عبدالتواب عبدالقوي">عائشة عبدالغفور عبدالتواب عبدالقوي</P>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -224,7 +222,7 @@
                                                                     <P class="mb-0"> 3,110.75</P>
                                                                 </div>
                                                                 <!-- edited -->
-                                                                <div class="col-sm-5 col-xl-4  seacrh-icon-col">
+                                                                <div class="col-md-auto col-xl-4  seacrh-icon-col">
                                                                     <div
                                                                         class="col-sm-12  d-flex justify-content-end px-0">
 
@@ -1487,7 +1485,33 @@
             });
         });
     </script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+    <script>
+         function truncateNames() {
+            const nameElements = document.querySelectorAll('.Tenant-Name');
+            
+            nameElements.forEach(element => {
+                const fullName = element.getAttribute('data-bs-title') || element.textContent;
+                const words = fullName.split(' ');
+                
+                if (words.length > 2) {
+                    const truncatedName = words.slice(0, 2).join(' ');
+                    
+                    if (window.innerWidth <= 520) {
+                        element.textContent = truncatedName;
+                    } else {
+                        element.textContent = fullName;
+                    }
+                }
+            });
+        }
+        
+        window.addEventListener('load', truncateNames);
+        window.addEventListener('resize', truncateNames);
+    </script>
 </body>
 
 </html>
-
