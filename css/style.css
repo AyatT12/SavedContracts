@@ -5,7 +5,7 @@
 
 /*Background color*/
 body {
-    background-color:rgba(254, 248, 232, 1);
+    background-color: rgba(254, 248, 232, 1);
     min-height: 100dvh;
     height: 100vh;
     display: flex;
@@ -33,9 +33,11 @@ nav {
     height: 53px;
     width: 53px;
 }
-.Long_Text_align{
+
+.Long_Text_align {
     text-align: end;
 }
+
 /*######################################################## */
 .notes_box {
     direction: rtl;
@@ -882,10 +884,12 @@ footer {
     margin: 0px;
     margin-bottom: 10px;
 }
+
 @media (max-width:1399.98px) {
-     .Available-order {
+    .Available-order {
         order: 1;
     }
+
     .paid-order {
         order: 2;
     }
@@ -894,15 +898,17 @@ footer {
         order: 3;
 
     }
-    
+
     .debit-order {
         order: 4;
     }
 }
+
 @media (max-width:767px) {
     .Available-order {
         min-width: 50%;
     }
+
     .paid-order {
         min-width: 50%;
     }
@@ -911,7 +917,7 @@ footer {
         min-width: 50%;
 
     }
-    
+
     .debit-order {
         min-width: 50%;
     }
@@ -1026,9 +1032,6 @@ footer {
 
 /* =========================================================================Settlement ==================================================== */
 /* Hide all except first fieldset */
-#SettlementForm .form-card {
-flex:1;
-}
 
 #SettlementForm fieldset:not(:first-of-type) {
     display: none;
@@ -3119,9 +3122,11 @@ fieldset {
     .main-card {
         max-height: 80%;
     }
-    .form-card{
+
+    .form-card {
         height: 70vh;
     }
+
     .reportTable-div {
         height: 40vh !important;
     }
@@ -3131,6 +3136,7 @@ fieldset {
 #custody-table-div {
     height: 45vh;
 }
+
 @media(max-width:1399.98px) {
     #custody-table-div {
         height: 30vh;
@@ -3142,8 +3148,15 @@ fieldset {
 #Table-details {
     height: 47vh;
 }
+
 @media(max-width:1399.98px) {
     #Table-details {
         height: 30vh;
+    }
+}
+
+@media (min-width:1399.98px) {
+    #SettlementForm .form-card {
+        flex: 1;
     }
 }
