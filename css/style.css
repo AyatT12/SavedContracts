@@ -1026,8 +1026,7 @@ footer {
 /* =========================================================================Settlement ==================================================== */
 /* Hide all except first fieldset */
 #SettlementForm .form-card {
-    height: 62.4vh;
-}
+flex:1 ;}
 
 #SettlementForm fieldset:not(:first-of-type) {
     display: none;
@@ -1376,12 +1375,6 @@ footer {
 
 }
 
-/***************************************************ميديا شاشة التسوية **************************************************/
-@media (max-height: 786px) {
-    #SettlementForm .form-card {
-        height: 55vh;
-    }
-}
 
 /***************************************************cards-media**************************************************/
 
@@ -2287,7 +2280,6 @@ input[type=checkbox] {
 
 .Receipt_Col {
     width: 60px !important;
-    /* أو أي عرض تفضله */
     min-width: 60px !important;
     max-width: 80px !important;
     text-align: center;
