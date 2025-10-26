@@ -3126,7 +3126,9 @@ fieldset {
     .form-card {
         height: 70vh;
     }
-
+    #SettlementForm .form-card {
+        height: 50vh;
+    }
     .reportTable-div {
         height: 40vh !important;
     }
