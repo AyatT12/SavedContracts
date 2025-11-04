@@ -315,28 +315,28 @@ $("body").on("click", ".img-bg", function (e) {
 
 //====================================================================================================
 //====================================================================================================
-const DataIcon = document.getElementById('Contract-data-icon');
-const dropdown = document.getElementById('dropdown-ContractData');
+// const DataIcon = document.getElementById('Contract-data-icon');
+// const dropdown = document.getElementById('dropdown-ContractData');
 
-DataIcon.addEventListener("click", function(event) {
-  event.stopPropagation(); 
-  if (dropdown.style.display === "none" || dropdown.style.display === "") {
-    dropdown.style.display = "block";
-    dropdown4.style.display = 'none';
-  } else {
-    dropdown.style.display = "none";
-  }
-});
+// DataIcon.addEventListener("click", function(event) {
+//   event.stopPropagation(); 
+//   if (dropdown.style.display === "none" || dropdown.style.display === "") {
+//     dropdown.style.display = "block";
+//     dropdown4.style.display = 'none';
+//   } else {
+//     dropdown.style.display = "none";
+//   }
+// });
 
-document.addEventListener("click", function(event) {
-  if (!DataIcon.contains(event.target) && !dropdown.contains(event.target)) {
-    dropdown.style.display = "none";
-  }
-});
+// document.addEventListener("click", function(event) {
+//   if (!DataIcon.contains(event.target) && !dropdown.contains(event.target)) {
+//     dropdown.style.display = "none";
+//   }
+// });
 
-dropdown.addEventListener("click", function(event) {
-  event.stopPropagation();
-});
+// dropdown.addEventListener("click", function(event) {
+//   event.stopPropagation();
+// });
 
 //====================================================================================================
 //====================================================================================================
@@ -457,7 +457,7 @@ WriteSignature.addEventListener("click", function () {
   uploadContainer.innerHTML = "";
   mainContainer.innerHTML = "";
   uploadContainer.innerHTML =
-    '<canvas id="canvas" width="200" height="200" class="mb-2  bg-white"></canvas>';
+    '<canvas id="canvas" width="200" height="200" class="mb-2 bg-white"></canvas>';
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
   ctx.lineWidth = 4;
@@ -564,4 +564,3 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
-
