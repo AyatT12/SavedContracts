@@ -1049,8 +1049,8 @@ footer {
 }
 
 .action-button:focus{
-box-shadow: none;
-border: none;
+ outline: none !important;
+box-shadow: none !important;
 }
 
 /*Previous Buttons*/
