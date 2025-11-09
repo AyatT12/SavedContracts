@@ -350,11 +350,11 @@ DataIcon2.addEventListener('click', function (event) {
 
     } else {
         dropdown2.style.display = 'block';
-        dropdown.style.display = 'none';
+        // dropdown.style.display = 'none';
     }
 });
 document.addEventListener("click", function(event) {
-  if (!DataIcon2.contains(event.target) && !dropdown.contains(event.target)) {
+  if (!DataIcon2.contains(event.target) && !dropdown2.contains(event.target)) {
     dropdown2.style.display = "none";
   }
 });
@@ -374,11 +374,11 @@ DataIcon4.addEventListener('click', function (event) {
 
     } else {
         dropdown4.style.display = 'block';
-        dropdown.style.display = 'none';
+        // dropdown.style.display = 'none';
     }
 });
 document.addEventListener("click", function(event) {
-  if (!DataIcon4.contains(event.target) && !dropdown.contains(event.target)) {
+  if (!DataIcon4.contains(event.target) && !dropdown4.contains(event.target)) {
     dropdown4.style.display = "none";
   }
 });
