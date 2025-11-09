@@ -122,7 +122,7 @@ function ImgUpload() {
             f.name.endsWith(".heic") ||
             f.name.endsWith(".heif")
           ) {
-            console.log("Processing HEIC/HEIF file:", f.name);
+            // console.log("Processing HEIC/HEIF file:", f.name);
 
             heic2any({
               blob: f,
@@ -265,8 +265,8 @@ function setImageRowHeight() {
         }
         const buffer = 30;
         const availableHeight = parentHeight - otherElementsHeight - buffer - 50;
-        console.log(availableHeight)
-        console.log(parentHeight)
+        // console.log(availableHeight)
+        // console.log(parentHeight)
         if (availableHeight > 50 || attempts >= maxAttempts) {
             imagesRow.style.height = `${Math.max(availableHeight, 200)}px`;
             return true;
@@ -564,3 +564,4 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
