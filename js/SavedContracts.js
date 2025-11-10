@@ -302,7 +302,7 @@ $("body").on("click", ".img-bg", function (e) {
   var imageUrl = $(this).css("background-image");
   imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
   var newTab = window.open();
-  newTab.document.body.innerHTML = '<img src="' + imageUrl + '" style="max-width: 100%; max-height: 100%;">';
+  newTab.document.body.innerHTML = '<img src="' + imageUrl + '" style="max-width: 80%; max-height: 80%;">';
 
   $(newTab.document.body).css({
     "background-color": "black",
@@ -564,4 +564,5 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
