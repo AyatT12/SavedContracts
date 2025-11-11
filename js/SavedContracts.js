@@ -316,7 +316,6 @@ $("body").on("click", ".img-bg", function (e) {
     padding: 0,
     "background-color": "black",
     display: "flex",
-    "align-items": "center",
     "justify-content": "center",
     overflow: "hidden"
   });
@@ -575,3 +574,4 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
