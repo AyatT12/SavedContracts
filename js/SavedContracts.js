@@ -303,7 +303,6 @@ $("body").on("click", ".img-bg", function (e) {
   imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
   var newTab = window.open();
   
-  // Add meta tags to head
   $(newTab.document.head).html(`
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -320,14 +319,14 @@ $("body").on("click", ".img-bg", function (e) {
         overflow: hidden;
       }
       body {
-        background-color: white;
+        background-color: black;
         display: flex;
         align-items: center;
         justify-content: center;
       }
       .image-container {
-        width: 80vw;
-        height: 80vh;
+        width: 70vw;
+        height: 70vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -348,7 +347,6 @@ $("body").on("click", ".img-bg", function (e) {
     </div>
   `;
 });
-
 //====================================================================================================
 //====================================================================================================
 // const DataIcon = document.getElementById('Contract-data-icon');
@@ -600,6 +598,7 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
 
 
