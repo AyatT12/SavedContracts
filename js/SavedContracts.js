@@ -571,7 +571,6 @@ WriteSignature.addEventListener("click", function () {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: white;
         }
         img {
           max-width: 100%;
@@ -579,6 +578,7 @@ WriteSignature.addEventListener("click", function () {
           width: auto;
           height: auto;
           object-fit: contain;
+          background-color: #ffffff;
         }
       </style>
     `);
