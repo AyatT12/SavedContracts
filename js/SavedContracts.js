@@ -320,7 +320,7 @@ $("body").on("click", ".img-bg", function (e) {
     width: "100vw",
     margin: 0,
     padding: 0,
-    "background-color": "black",
+    "background-color": "red",
     display: "flex",
     "align-items": "center",
     "justify-content": "center",
@@ -585,4 +585,5 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
