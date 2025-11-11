@@ -316,7 +316,7 @@ $("body").on("click", ".img-bg", function (e) {
   });
   
   $(newTab.document.body).css({
-    height: "100vh",
+    height: "90vh",
     width: "100vw",
     margin: 0,
     padding: 0,
@@ -585,3 +585,4 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
