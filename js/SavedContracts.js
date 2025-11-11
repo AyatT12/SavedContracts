@@ -314,14 +314,19 @@ $("body").on("click", ".img-bg", function (e) {
     width: "100vw",
     margin: 0,
     padding: 0,
-    "background-color": "red",
+    "background-color": "blue",
     display: "flex",
+    "align-items": "center",
     "justify-content": "center",
+    overflow: "hidden"
   });
   
-  newTab.document.body.innerHTML = '<img src="' + imageUrl + '" style="max-width: 80vw; max-height: 80vh; width: auto; height: auto; object-fit: contain;">';
+  newTab.document.body.innerHTML = `
+    <div style="width: 90%; height: 90%; display: flex; align-items: center; justify-content: center;">
+      <img src="${imageUrl}" style="width: 100%;object-fit: contain;">
+    </div>
+  `;
 });
-
 //====================================================================================================
 //====================================================================================================
 // const DataIcon = document.getElementById('Contract-data-icon');
@@ -573,6 +578,7 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
 
 
