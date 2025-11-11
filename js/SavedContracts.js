@@ -303,6 +303,12 @@ $("body").on("click", ".img-bg", function (e) {
   imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
   var newTab = window.open();
   
+  $(newTab.document.head).html(`
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Image</title>
+  `);
+  
   $(newTab.document.documentElement).css({
     height: "100%",
     margin: 0,
@@ -314,7 +320,7 @@ $("body").on("click", ".img-bg", function (e) {
     width: "100vw",
     margin: 0,
     padding: 0,
-    "background-color": "blue",
+    "background-color": "black",
     display: "flex",
     "align-items": "center",
     "justify-content": "center",
@@ -322,11 +328,12 @@ $("body").on("click", ".img-bg", function (e) {
   });
   
   newTab.document.body.innerHTML = `
-    <div style="width: 90%; height: 90%; display: flex; align-items: center; justify-content: center;">
-      <img src="${imageUrl}" style="width: 100%;object-fit: contain;">
+    <div style="width: 80%; height: 80%; display: flex; align-items: center; justify-content: center;">
+      <img src="${imageUrl}" style="width: 100%; height: 100%; object-fit: contain;">
     </div>
   `;
 });
+
 //====================================================================================================
 //====================================================================================================
 // const DataIcon = document.getElementById('Contract-data-icon');
@@ -578,7 +585,3 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
-
-
-
-
