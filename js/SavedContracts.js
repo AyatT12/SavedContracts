@@ -122,7 +122,7 @@ function ImgUpload() {
             f.name.endsWith(".heic") ||
             f.name.endsWith(".heif")
           ) {
-            // console.log("Processing HEIC/HEIF file:", f.name);
+            console.log("Processing HEIC/HEIF file:", f.name);
 
             heic2any({
               blob: f,
@@ -265,8 +265,8 @@ function setImageRowHeight() {
         }
         const buffer = 30;
         const availableHeight = parentHeight - otherElementsHeight - buffer - 50;
-        // console.log(availableHeight)
-        // console.log(parentHeight)
+        console.log(availableHeight)
+        console.log(parentHeight)
         if (availableHeight > 50 || attempts >= maxAttempts) {
             imagesRow.style.height = `${Math.max(availableHeight, 200)}px`;
             return true;
@@ -302,16 +302,27 @@ $("body").on("click", ".img-bg", function (e) {
   var imageUrl = $(this).css("background-image");
   imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
   var newTab = window.open();
-  newTab.document.body.innerHTML = '<img src="' + imageUrl + '" style="max-width: 80%; max-height: 80%;">';
-
+  
+  $(newTab.document.documentElement).css({
+    height: "100%",
+    margin: 0,
+    padding: 0
+  });
+  
   $(newTab.document.body).css({
+    height: "100vh",
+    width: "100vw",
+    margin: 0,
+    padding: 0,
     "background-color": "black",
     display: "flex",
     "align-items": "center",
     "justify-content": "center",
+    overflow: "hidden"
   });
+  
+  newTab.document.body.innerHTML = '<img src="' + imageUrl + '" style="max-width: 80vw; max-height: 80vh; width: auto; height: auto; object-fit: contain;">';
 });
-
 
 //====================================================================================================
 //====================================================================================================
@@ -564,6 +575,3 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
-
-
-
