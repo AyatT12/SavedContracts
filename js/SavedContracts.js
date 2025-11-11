@@ -303,33 +303,48 @@ $("body").on("click", ".img-bg", function (e) {
   imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
   var newTab = window.open();
   
+  // Add meta tags to head
   $(newTab.document.head).html(`
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Image</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .image-container {
+        width: 80vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+    </style>
   `);
   
-  $(newTab.document.documentElement).css({
-    height: "100%",
-    margin: 0,
-    padding: 0
-  });
-  
-  $(newTab.document.body).css({
-    height: "100vh",
-    width: "100vw",
-    margin: 0,
-    padding: 0,
-    "background-color": "red",
-    display: "flex",
-    "align-items": "center",
-    "justify-content": "center",
-    overflow: "hidden"
-  });
-  
   newTab.document.body.innerHTML = `
-    <div style="width: 80%; height: 80%; display: flex; align-items: center; justify-content: center;">
-      <img src="${imageUrl}" style="width: 100%; height: 100%; object-fit: contain;">
+    <div class="image-container">
+      <img src="${imageUrl}" alt="View Image">
     </div>
   `;
 });
@@ -585,6 +600,7 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
 
 
