@@ -1,50 +1,49 @@
 //=======================================’Moving Between Fieldsets=============================================================
 let current_fs, next_fs, previous_fs;
 const nextButtons = document.querySelectorAll(".next");
-const ExpensesCheckbox = document.getElementById('expenses');
-const CompensationCheckbox = document.getElementById('compensation-check');
+const ExpensesCheckbox = document.getElementById("expenses");
+const CompensationCheckbox = document.getElementById("compensation-check");
 const fieldsets = document.querySelectorAll("fieldset");
 
 function setFocusToFirstInput(fieldset) {
-    var firstFocusable = fieldset.find("input, select , textarea").first();
-    if (firstFocusable.length) {
-        firstFocusable.focus();
-    }
+  var firstFocusable = fieldset.find("input, select , textarea").first();
+  if (firstFocusable.length) {
+    firstFocusable.focus();
+  }
 }
 
 function moveToNextInput(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        let formElements = Array.from(
-            event.target.form.querySelectorAll("input, select, button , textarea")
-        );
-        let index = formElements.indexOf(event.target);
+  if (event.key === "Enter") {
+    event.preventDefault();
+    let formElements = Array.from(
+      event.target.form.querySelectorAll("input, select, button , textarea")
+    );
+    let index = formElements.indexOf(event.target);
 
-        if (index > -1 && index < formElements.length - 1) {
-            let nextElement = formElements[index + 1];
-            if (nextElement.tagName === "BUTTON" || nextElement.type === "button") {
-                nextElement.click();
-            } else {
-                nextElement.focus();
-            }
-        }
+    if (index > -1 && index < formElements.length - 1) {
+      let nextElement = formElements[index + 1];
+      if (nextElement.tagName === "BUTTON" || nextElement.type === "button") {
+        nextElement.click();
+      } else {
+        nextElement.focus();
+      }
     }
+  }
 }
 
 $(document).ready(function () {
-    $("input, select, button , textarea").on("keydown", moveToNextInput);
+  $("input, select, button , textarea").on("keydown", moveToNextInput);
 
-    var firstFieldset = $("fieldset").first();
-    setFocusToFirstInput(firstFieldset);
+  var firstFieldset = $("fieldset").first();
+  setFocusToFirstInput(firstFieldset);
 });
 
 $(".next").click(function () {
   const nextBtn = this; // Use `this` to refer to the current button
   const current_fs = $(nextBtn).closest("fieldset");
   let next_fs = current_fs.next();
-  
 
-   next_fs = current_fs.next();
+  next_fs = current_fs.next();
   $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
   next_fs.show();
@@ -54,15 +53,17 @@ $(".next").click(function () {
 });
 
 $(".previous").click(function () {
-    const prevBtn = this; // Use `this` to refer to the current button
-    current_fs = $(prevBtn).closest("fieldset");
-    previous_fs = current_fs.prev();
-    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+  const prevBtn = this; // Use `this` to refer to the current button
+  current_fs = $(prevBtn).closest("fieldset");
+  previous_fs = current_fs.prev();
+  $("#progressbar li")
+    .eq($("fieldset").index(current_fs))
+    .removeClass("active");
 
-    previous_fs.show();
-    current_fs.hide();
+  previous_fs.show();
+  current_fs.hide();
 
-    setFocusToFirstInput(previous_fs);
+  setFocusToFirstInput(previous_fs);
 });
 //====================================================================================================
 //========================================Upload examination Imgs Lists============================================================
@@ -89,11 +90,13 @@ function ImgUpload() {
       var filesArr = Array.prototype.slice.call(files);
       var uploadBtnBox = document.getElementById("checking-img");
       var uploadBtnBox1 = document.getElementById("upload__btn-box");
-      var errorMessageDivs = document.getElementsByClassName("Examination-error-message"); 
+      var errorMessageDivs = document.getElementsByClassName(
+        "Examination-error-message"
+      );
 
       if (imgArray.length + filesArr.length > maxLength) {
         uploadBtnBox.disabled = true;
-        // Loop 
+        // Loop
         for (var j = 0; j < errorMessageDivs.length; j++) {
           errorMessageDivs[j].textContent =
             "الرجاء ... التحقق من جميع البنود و بحد اقصى 22 صورة";
@@ -102,7 +105,7 @@ function ImgUpload() {
         uploadBtnBox1.style.display = "none";
       } else {
         uploadBtnBox.disabled = false;
-        // Loop 
+        // Loop
         for (var j = 0; j < errorMessageDivs.length; j++) {
           errorMessageDivs[j].style.display = "none";
         }
@@ -110,7 +113,10 @@ function ImgUpload() {
       }
 
       var processedCount = 0;
-      var totalToProcess = Math.min(filesArr.length, maxLength - imgArray.length);
+      var totalToProcess = Math.min(
+        filesArr.length,
+        maxLength - imgArray.length
+      );
 
       for (var i = 0; i < totalToProcess; i++) {
         (function (f) {
@@ -146,7 +152,7 @@ function ImgUpload() {
                     url: e.target.result,
                   });
                   console.log(imgArray);
-                  
+
                   processedCount++;
                   if (processedCount === totalToProcess) {
                     setTimeout(setImageRowHeight, 100);
@@ -178,7 +184,7 @@ function ImgUpload() {
                 url: e.target.result,
               });
               // console.log(imgArray);
-              
+
               processedCount++;
               if (processedCount === totalToProcess) {
                 setTimeout(setImageRowHeight, 100);
@@ -207,7 +213,9 @@ function ImgUpload() {
 
     var maxLength = 22;
     var uploadBtnBox = document.getElementById("checking-img");
-    var errorMessageDivs = document.getElementsByClassName("Examination-error-message");
+    var errorMessageDivs = document.getElementsByClassName(
+      "Examination-error-message"
+    );
     var uploadBtnBox1 = document.getElementById("upload__btn-box");
 
     if (imgArray.length >= maxLength) {
@@ -227,82 +235,84 @@ function ImgUpload() {
       }
       uploadBtnBox1.style.display = "block";
     }
-    
+
     setTimeout(setImageRowHeight, 50);
   });
 }
 
 function setImageRowHeight() {
+  if (window.innerWidth <= 991) {
+    const imagesRow = document.querySelector(".virtual-check-images-row");
+    if (imagesRow) {
+      imagesRow.style.height = "";
+    }
+    return;
+  }
+  const virtualCheckData = document.querySelector(".virtual-check-data");
+  const imagesRow = document.querySelector(".virtual-check-images-row");
 
-     if (window.innerWidth <= 991) {
-        const imagesRow = document.querySelector('.virtual-check-images-row');
-        if (imagesRow) {
-            imagesRow.style.height = '';
-        }
-        return;
+  if (!virtualCheckData || !imagesRow) return;
+
+  let attempts = 0;
+  const maxAttempts = 5;
+
+  function measureHeight() {
+    const parentHeight = virtualCheckData.offsetHeight;
+    const currentReadingRows = document.querySelectorAll(
+      ".CurrentReadingg_row"
+    );
+    const errorMessage = document.querySelector(
+      ".virtual-check-data > .row.mt-auto"
+    );
+
+    let otherElementsHeight = 0;
+
+    currentReadingRows.forEach((row) => {
+      otherElementsHeight += row.offsetHeight;
+    });
+
+    if (errorMessage) {
+      otherElementsHeight += errorMessage.offsetHeight;
     }
-    const virtualCheckData = document.querySelector('.virtual-check-data');
-    const imagesRow = document.querySelector('.virtual-check-images-row');
-    
-    if (!virtualCheckData || !imagesRow) return;
-    
-    let attempts = 0;
-    const maxAttempts = 5;
-    
-    function measureHeight() {
-        const parentHeight = virtualCheckData.offsetHeight;
-        const currentReadingRows = document.querySelectorAll('.CurrentReadingg_row');
-        const errorMessage = document.querySelector('.virtual-check-data > .row.mt-auto');
-        
-        let otherElementsHeight = 0;
-        
-        currentReadingRows.forEach(row => {
-            otherElementsHeight += row.offsetHeight;
-        });
-        
-         if (errorMessage) {
-            otherElementsHeight += errorMessage.offsetHeight;
-        }
-        const buffer = 30;
-        const availableHeight = parentHeight - otherElementsHeight - buffer - 50;
-        console.log(availableHeight)
-        console.log(parentHeight)
-        if (availableHeight > 50 || attempts >= maxAttempts) {
-            imagesRow.style.height = `${Math.max(availableHeight, 200)}px`;
-            return true;
-        }
-        return false;
+    const buffer = 30;
+    const availableHeight = parentHeight - otherElementsHeight - buffer - 50;
+
+    if (availableHeight > 50 || attempts >= maxAttempts) {
+      imagesRow.style.height = `${Math.max(availableHeight, 200)}px`;
+      return true;
     }
-    
-    function tryMeasure() {
-        attempts++;
-        const success = measureHeight();
-        
-        if (!success && attempts < maxAttempts) {
-            setTimeout(tryMeasure, 100);
-        }
+    return false;
+  }
+
+  function tryMeasure() {
+    attempts++;
+    const success = measureHeight();
+
+    if (!success && attempts < maxAttempts) {
+      setTimeout(tryMeasure, 100);
     }
-    
-    tryMeasure();
+  }
+
+  tryMeasure();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(setImageRowHeight, 100);
-    setTimeout(setImageRowHeight, 500);
-    setTimeout(setImageRowHeight, 1000);
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(setImageRowHeight, 100);
+  setTimeout(setImageRowHeight, 500);
+  setTimeout(setImageRowHeight, 1000);
 });
 
-window.addEventListener('resize', function() {
-    setTimeout(setImageRowHeight, 50);
-    setTimeout(setImageRowHeight, 100);
-    setTimeout(setImageRowHeight, 200);
+window.addEventListener("resize", function () {
+  setTimeout(setImageRowHeight, 50);
+  setTimeout(setImageRowHeight, 100);
+  setTimeout(setImageRowHeight, 200);
 });
 
 $("body").on("click", ".img-bg", function (e) {
   var imageUrl = $(this).css("background-image");
   imageUrl = imageUrl.replace(/^url\(['"](.+)['"]\)/, "$1");
   var newTab = window.open();
-  
+
   $(newTab.document.head).html(`
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -340,7 +350,7 @@ $("body").on("click", ".img-bg", function (e) {
       }
     </style>
   `);
-  
+
   newTab.document.body.innerHTML = `
     <div class="image-container">
       <img src="${imageUrl}" alt="View Image">
@@ -349,85 +359,56 @@ $("body").on("click", ".img-bg", function (e) {
 });
 //====================================================================================================
 //====================================================================================================
-// const DataIcon = document.getElementById('Contract-data-icon');
-// const dropdown = document.getElementById('dropdown-ContractData');
+const DataIcon2 = document.getElementById("payment-contract-value-icon");
+const dropdown2 = document.getElementById(
+  "payment-dropdowncontent-contractValue"
+);
 
-// DataIcon.addEventListener("click", function(event) {
-//   event.stopPropagation(); 
-//   if (dropdown.style.display === "none" || dropdown.style.display === "") {
-//     dropdown.style.display = "block";
-//     dropdown4.style.display = 'none';
-//   } else {
-//     dropdown.style.display = "none";
-//   }
-// });
-
-// document.addEventListener("click", function(event) {
-//   if (!DataIcon.contains(event.target) && !dropdown.contains(event.target)) {
-//     dropdown.style.display = "none";
-//   }
-// });
-
-// dropdown.addEventListener("click", function(event) {
-//   event.stopPropagation();
-// });
-
-//====================================================================================================
-//====================================================================================================
-const DataIcon2 = document.getElementById('payment-contract-value-icon');
-const dropdown2 = document.getElementById('payment-dropdowncontent-contractValue');
-
-DataIcon2.addEventListener('click', function (event) {
-  event.stopPropagation(); 
-	if (dropdown2.style.display === 'block') {
-        dropdown2.style.display = 'none';
-
-    } else {
-        dropdown2.style.display = 'block';
-        // dropdown.style.display = 'none';
-    }
+DataIcon2.addEventListener("click", function (event) {
+  event.stopPropagation();
+  if (dropdown2.style.display === "block") {
+    dropdown2.style.display = "none";
+  } else {
+    dropdown2.style.display = "block";
+  }
 });
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
   if (!DataIcon2.contains(event.target) && !dropdown2.contains(event.target)) {
     dropdown2.style.display = "none";
   }
 });
 
-dropdown2.addEventListener("click", function(event) {
+dropdown2.addEventListener("click", function (event) {
   event.stopPropagation();
 });
 //====================================================================================================
 //====================================================================================================
-const DataIcon4 = document.getElementById('contract-value-icon');
-const dropdown4 = document.getElementById('dropdown-content-contractValue');
+const DataIcon4 = document.getElementById("contract-value-icon");
+const dropdown4 = document.getElementById("dropdown-content-contractValue");
 
-DataIcon4.addEventListener('click', function (event) {
-  event.stopPropagation(); 
-	if (dropdown4.style.display === 'block') {
-        dropdown4.style.display = 'none';
-
-    } else {
-        dropdown4.style.display = 'block';
-        // dropdown.style.display = 'none';
-    }
+DataIcon4.addEventListener("click", function (event) {
+  event.stopPropagation();
+  if (dropdown4.style.display === "block") {
+    dropdown4.style.display = "none";
+  } else {
+    dropdown4.style.display = "block";
+  }
 });
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
   if (!DataIcon4.contains(event.target) && !dropdown4.contains(event.target)) {
     dropdown4.style.display = "none";
   }
 });
 
-dropdown4.addEventListener("click", function(event) {
+dropdown4.addEventListener("click", function (event) {
   event.stopPropagation();
 });
 //====================================================================================================
-$('#examination-images').click(function(){
-   $('#FirstUpload-img3').hide()
-})
+$("#examination-images").click(function () {
+  $("#FirstUpload-img3").hide();
+});
 
 // // // //////////////////////////////////////////////// رفع صورة التوقيع ////////////////////////////////////////////////////////////////////////
-
-// //variables//
 let saveSignatureBtn = null;
 
 document
@@ -469,6 +450,51 @@ imageUpload.addEventListener("change", function () {
       uploadContainer.innerHTML = "";
       uploadContainer.appendChild(previewImage);
       uploadContainer.classList.add("previewing");
+      previewImage.addEventListener("click", function () {
+        var newTab = window.open();
+        $(newTab.document.head).html(`
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>View Image</title>
+          <style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+            html, body {
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+            }
+            body {
+              background-color: black;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .image-container {
+              width: 70vw;
+              height: 70vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            img {
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
+              object-fit: contain;
+            }
+          </style>
+          `);
+        newTab.document.body.innerHTML = `
+          <div class="image-container">
+            <img src="${imgeURL}" alt="View Image">
+          </div>
+        `;
+      });
     };
     reader.readAsDataURL(file);
   }
@@ -484,10 +510,10 @@ removeSignatureImg.addEventListener("click", function (event) {
       ' <img class="upload-icon" src="img/Rectangle 144.png" alt="Upload Icon"><p>ارفق صورة التوقيع</p>';
   }
 });
-// // // //////////////////////////////////////////////// كتابة التوقيع ////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////// كتابة التوقيع ////////////////////////////////////////////////////////////////////////
 const WriteSignature = document.getElementById("WriteSignature");
 WriteSignature.addEventListener("click", function () {
-  document.body.classList.add('no-scroll');
+  document.body.classList.add("no-scroll");
   uploadContainer.innerHTML = "";
   mainContainer.innerHTML = "";
   uploadContainer.innerHTML =
@@ -501,7 +527,9 @@ WriteSignature.addEventListener("click", function () {
   var prevY = 0;
   var currX = 0;
   var currY = 0;
-
+  //  متغير يحمل رابط اخر صورة للتوقيع
+  var dataURL = null; 
+  
   function drawLine(x0, y0, x1, y1) {
     ctx.beginPath();
     ctx.moveTo(x0, y0);
@@ -509,6 +537,59 @@ WriteSignature.addEventListener("click", function () {
     ctx.stroke();
     ctx.closePath();
   }
+
+  // فانكشن عرض الصورة 
+  function openImageInNewTab() {
+    // يتحقق اذا كان هناك توقيع مكتوب بالفعل ام لا 
+    if (!dataURL) return; 
+  
+    var newTab = window.open();
+    $(newTab.document.head).html(`
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>View Image</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        html, body {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+        body {
+          background-color: black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .image-container {
+          width: 90vw;
+          height: 90vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+        }
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+        }
+      </style>
+    `);
+    newTab.document.body.innerHTML = `
+      <div class="image-container">
+        <img src="${dataURL}" alt="View Image">
+      </div>
+    `;
+  }
+// اضافة فانكشن عرض صورة التوقيع المكتوب 
+  canvas.addEventListener("click", openImageInNewTab);
 
   canvas.addEventListener("mousedown", handleMouseDown, false);
   canvas.addEventListener("mousemove", handleMouseMove, false);
@@ -536,6 +617,8 @@ WriteSignature.addEventListener("click", function () {
 
   function handleMouseUp() {
     drawing = false;
+// اخر شكل كتبه المستخدم
+    dataURL = canvas.toDataURL();
   }
 
   function handleTouchStart(e) {
@@ -556,51 +639,49 @@ WriteSignature.addEventListener("click", function () {
 
   function handleTouchEnd() {
     drawing = false;
+    // Update the dataURL with the latest drawing
+    dataURL = canvas.toDataURL();
   }
+
   function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    dataURL = null; // Clear the stored signature
   }
 
   document.getElementById("clear").addEventListener("click", function () {
     clearCanvas();
   });
- 
 });
- function SaveWrittenSignature() {
-  document.body.classList.remove('no-scroll');
-	var canvas = document.getElementById("canvas");
-    var dataURL = canvas.toDataURL();
-    var link = document.createElement("a");
-    link.href = dataURL;
-    console.log(link.href);
-    $("#signature-modal").modal("hide");
 
+function SaveWrittenSignature() {
+  document.body.classList.remove("no-scroll");
+  var canvas = document.getElementById("canvas");
+  var dataURL = canvas.toDataURL();
+  var link = document.createElement("a");
+  link.href = dataURL;
+  console.log(link.href);
+  $("#signature-modal").modal("hide");
+}
+
+// Save the uploded signature image
+function SaveUplodedSignature() {
+  const img = document.getElementById("signatureImage");
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const context = canvas.getContext("2d");
+  context.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const base64 = canvas.toDataURL("image/jpeg");
+  console.log(base64);
+  $("#signature-modal").modal("hide");
+}
+
+document.getElementById("save").addEventListener("click", function () {
+  if (saveSignatureBtn === "UploadSigntaurePic") {
+    SaveUplodedSignature();
+  } else if (saveSignatureBtn === "WriteSignature") {
+    SaveWrittenSignature();
+  } else {
+    console.log("No button has been clicked yet");
   }
- // Save the uploded signature image
- function SaveUplodedSignature() {
-    const img = document.getElementById("signatureImage");
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const context = canvas.getContext("2d");
-    context.drawImage(img, 0, 0, canvas.width, canvas.height);
-    const base64 = canvas.toDataURL("image/jpeg");
-    console.log(base64);
-    $("#signature-modal").modal("hide");
-
-  }
-  document.getElementById("save").addEventListener("click", function () {
-    if (saveSignatureBtn === "UploadSigntaurePic") {
-      SaveUplodedSignature();
-    } else if (saveSignatureBtn === "WriteSignature") {
-      SaveWrittenSignature();
-    } else {
-      console.log("No button has been clicked yet");
-    }
-  });
-
-
-
-
-
-
+});
