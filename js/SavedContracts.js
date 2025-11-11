@@ -317,7 +317,6 @@ $("body").on("click", ".img-bg", function (e) {
     "background-color": "black",
     display: "flex",
     "justify-content": "center",
-    overflow: "hidden"
   });
   
   newTab.document.body.innerHTML = '<img src="' + imageUrl + '" style="max-width: 80vw; max-height: 80vh; width: auto; height: auto; object-fit: contain;">';
@@ -574,4 +573,5 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
