@@ -320,7 +320,7 @@ $("body").on("click", ".img-bg", function (e) {
     width: "100vw",
     margin: 0,
     padding: 0,
-    "background-color": "black",
+    "background-color": "red",
     display: "flex",
     "align-items": "center",
     "justify-content": "center",
@@ -328,7 +328,7 @@ $("body").on("click", ".img-bg", function (e) {
   });
   
   newTab.document.body.innerHTML = `
-    <div style="width: 80%; height: 70%; display: flex; align-items: center; justify-content: center;">
+    <div style="width: 80%; height: 80%; display: flex; align-items: center; justify-content: center;">
       <img src="${imageUrl}" style="width: 100%; height: 100%; object-fit: contain;">
     </div>
   `;
@@ -585,6 +585,7 @@ WriteSignature.addEventListener("click", function () {
       console.log("No button has been clicked yet");
     }
   });
+
 
 
 
