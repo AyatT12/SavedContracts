@@ -1934,12 +1934,14 @@
 
         </footer>
 
-        <!-- <div class="container-fluid sec-loader-container ">
-        <div class="content">
-            <div class="loader"></div>
+         <div class="LoaderArea" style="display: none;" id="LoaderArea">
+        <div class="spinner-border mb-3">
+              <span class='visually-hidden'>Loading...</span>
         </div>
-
-    </div> -->
+            <p class="text-white">
+             فضلاً أنتظر ......
+            </p>
+        </div>
     </div>
 
 
@@ -1954,6 +1956,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="js/SavedContracts.js"></script>
     <script src="js/TechnicalCheckUp.js"></script>
+        <script src="js/Loader.js"></script>
+
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
@@ -2037,4 +2041,5 @@
 </body>
 
 </html>
+
 
